@@ -12,13 +12,17 @@ The component provides a wrapper over the `symfony/var-dumper` library. This com
 </p>
 
 
-## Usage
+## Installation
 
-Installation:
+Use [Composer](https://getcomposer.org/) to install the package:
 
 ```bash
 composer require spiral/dumper
 ```
+
+## Usage
+
+### Symfony VarDumper
 
 In your code:
 
@@ -48,6 +52,25 @@ final class RoutesBootloader extends BaseRoutesBootloader
     // ...
 }
 ```
+
+### Buggregator
+
+The package provides a built-in integration with the [Buggregator](https://github.com/buggregator) service via
+[Trap](https://github.com/buggregator/trap) library.
+
+1. Run a Buggregator server:
+    - Full server using Docker:
+      ```bash
+      docker run --rm --pull always -p 127.0.0.1:8000:8000 -p 127.0.0.1:1025:1025 -p 127.0.0.1:9912:9912 -p 127.0.0.1:9913:9913 ghcr.io/buggregator/server:latest
+      ```
+    - Mini server using PHP:
+      ```bash
+      ./vendor/bin/trap
+      ```
+2. Use `trap()` function instead of `dump()` to send dumps to the Buggregator server:
+    ```php
+    trap($variable);
+    ```
 
 ## License
 
